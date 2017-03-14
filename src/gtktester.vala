@@ -186,6 +186,18 @@ namespace Gtkt {
       });
       running ();
     }
+    /**
+     *
+     */
+    public void set_css_file (GLib.File css) {
+      assert (css.query_exists ());
+      var pcss = new Gtk.CssProvider ();
+      try {
+        pcss.load_from_file (css);
+      } catch (GLib.Error e) { GLib.warning ("StyleError: "+e.message); }
+      Gtk.StyleContext.add_provider_for_screen (get_screen (), pcss,
+                                                STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
   }
 
   private class ErrorMessage : Gtk.Grid {
