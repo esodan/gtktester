@@ -1,0 +1,13 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+datarootdir=@datarootdir@
+datadir=@datadir@
+includedir=@includedir@
+
+Name: gtktester-@API_VERSION@
+Description: GTK+ widget tester GUI
+Version: @VERSION@
+Requires: gio-2.0 >= 2.42 gtk+-3.0
+Libs: -L${libdir} -lgtktester-@API_VERSION@
+Cflags: -I${includedir}/gtktester-@API_VERSION@

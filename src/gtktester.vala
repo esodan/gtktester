@@ -88,7 +88,7 @@ namespace Gtkt {
     /**
      * Disable autoclose to wait for events
      */
-    public bool waiting_for_event { get; set; default = true; }
+    public bool waiting_for_event { get; set; default = false; }
 
     /**
      * Event to initialize a test.
