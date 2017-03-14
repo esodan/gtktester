@@ -20,9 +20,9 @@ Make sure your widget have public API you can use to setup it or get data to che
 
 Set Gtkt.WindowTester.waiting_for_event = true, then Gtk.run (), your test window will be shown until you close it manually or testcases are finished. This will help you to check manually if information shown correspond with the one you set by your widget's API.
 
-# Initialize singnal
+# Testing signals
 
-run() method is automatically called when WindowTester is shown. This method calls next_test() to setup your test case information, like title and description, set them using add_test().
+run() method is automatically called when WindowTester is shown, running() signal is emitted at this time. This method calls next_test() to setup your test case information, like title and description, set them using add_test().
 
 Once setup is finished, you can connect a handler to initialize() signal, then you can setup your test case, make sure you use current_ntest property to know test number to setup. Once finished may you want to call check() signal, then in there and test number, check conditions in your widget.
 
