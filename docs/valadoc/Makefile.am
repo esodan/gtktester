@@ -1,0 +1,6 @@
+SUBDIRS=
+
+if BUILD_DEVHELP_DOCS
+SUBDIRS+=devhelp
+endif
+

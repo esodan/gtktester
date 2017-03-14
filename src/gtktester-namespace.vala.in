@@ -1,0 +1,3 @@
+
+[CCode (gir_namespace = "Gtkt", gir_version = "@API_VERSION@", cheader_filename = "gtktester.h")]
+namespace Gtkt {}
