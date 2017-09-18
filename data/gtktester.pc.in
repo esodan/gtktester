@@ -1,9 +1,9 @@
 prefix=@prefix@
 exec_prefix=@exec_prefix@
 libdir=@libdir@
-datarootdir=@datarootdir@
-datadir=@datadir@
-includedir=@includedir@
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+includedir=${prefix}/include
 
 Name: gtktester-@API_VERSION@
 Description: GTK+ widget tester GUI
