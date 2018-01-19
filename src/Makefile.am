@@ -7,6 +7,7 @@ lib_LTLIBRARIES = $(VALA_TARGET)
 VALASOURCES = \
 	gtktester-namespace.vala \
 	gtktester.vala \
+	gtkt-headerbar.vala \
 	$(NULL)
 
 libgtktester_@API_VERSION@_la_SOURCES = \

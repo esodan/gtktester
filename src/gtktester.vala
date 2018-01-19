@@ -1,3 +1,4 @@
+/* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
 /* gtktester.vala
  *
  * Copyright (C) 2017 Daniel Espinosa
@@ -31,19 +32,7 @@ namespace Gtkt {
     [GtkChild]
     private Gtk.TextBuffer description;
     [GtkChild]
-    private Gtk.Label lclosing;
-    [GtkChild]
-    private Gtk.Image image;
-    [GtkChild]
-    private Gtk.HeaderBar headerbar;
-    [GtkChild]
     private Gtk.Box   widget_box;
-    [GtkChild]
-    private Gtk.Button bfails;
-    [GtkChild]
-    private Gtk.Button bnexttest;
-    [GtkChild]
-    private Gtk.ListBox lfails;
 
     private int _nfails = 0;
     private int _current_ntest = 0;
@@ -53,7 +42,7 @@ namespace Gtkt {
     }
     private GLib.Queue<Test> _tests = new Queue<Test> ();
     private Gtk.Widget _widget;
-
+    private Gtkt.HeaderBar headerbar;
     /**
      * Widget under test.
      */
@@ -108,14 +97,16 @@ namespace Gtkt {
     public signal void check ();
 
     construct {
+      headerbar = new Gtkt.HeaderBar ();
+      headerbar.next.connect (()=>{
+        next_test ();
+      });
+      this.set_titlebar (headerbar);
       this.destroy.connect (()=>{
         Gtk.main_quit ();
       });
       this.show.connect (()=>{
         try { run (); } catch { assert_not_reached (); }
-      });
-      bnexttest.clicked.connect (()=>{
-        next_test ();
       });
     }
 
@@ -160,25 +151,22 @@ namespace Gtkt {
      * Start running tests
      */
     public void run () throws GLib.Error {
-      image.icon_name = "gtk-media-play";
+      if (waiting_for_event) {
+        headerbar.status = Gtkt.HeaderBar.Status.WAITTING;
+      } else {
+        headerbar.status = Gtkt.HeaderBar.Status.RUNNING;
+      }
       if (_nfails == 0)
-        image.icon_name = "gtk-apply";
+        headerbar.status = Gtkt.HeaderBar.Status.SUCCESS;
       else
-        image.icon_name = "gtk-dialog-warning";
-      bfails.label = _nfails.to_string ();
+        headerbar.status = Gtkt.HeaderBar.Status.FAIL;
+      headerbar.fails_number = _nfails;
       next_test ();
       GLib.Timeout.add (1000, ()=>{
         if (waiting_for_event) {
-          GLib.message ("Waiting for events...");
-          if (!(lclosing is Gtk.Label))
-            GLib.message ("Label lclossing doesn't exists!!!!");
-          else
-            lclosing.label = "Waiting for Events...";
           return true;
         }
         if (--timeout > 0) {
-          GLib.message ("Closing in ..."+timeout.to_string ());
-          lclosing.label = "Closing in ... "+timeout.to_string ();
           return true;
         }
         this.destroy ();

@@ -33,7 +33,8 @@ configure_file(output : 'config.h',
 
 # Resources sources
 resfiles = files([
-	'gtktester.ui'
+	'gtktester.ui',
+	'gtkt-headerbar.ui'
 ])
 
 gresg = find_program('gresg')
@@ -79,7 +80,8 @@ resourcesh = custom_target ('resources-h',
 resources_dep = declare_dependency ( sources : [ resourcesc, resourcesh])
 
 valasources = files ([
-	'gtktester.vala'
+	'gtktester.vala',
+	'gtkt-headerbar.vala'
 ])
 
 sources = files ([
@@ -118,4 +120,13 @@ custom_target('typelib',
 	depends: lib,
 	install: true,
 	install_dir: join_paths(get_option('libdir'), 'girepository-1.0'))
+
+# GtktApp
+
+files_gtktapp = files([
+	'gtktapp.vala'
+])
+gtktapp = executable('gtktapp', files_gtktapp,
+	dependencies : [ gtk, namespaceinfo_dep, resources_dep ],
+	link_with : lib)
 
