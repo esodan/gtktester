@@ -30,8 +30,6 @@ public class Gtkt.HeaderBar : Gtk.HeaderBar {
   private Gtk.Button bfails;
   [GtkChild]
   private Gtk.Button bnexttest;
-  [GtkChild]
-  private Gtk.ListBox lfails;
 
   /**
    * Message to be displayed for test suite.
@@ -69,6 +67,10 @@ public class Gtkt.HeaderBar : Gtk.HeaderBar {
         case Status.FAIL:
           image.icon_name = "gtk-dialog-warning";
           lclosing.label = "One or more tests fail";
+        break;
+        case Status.PAUSE:
+          image.icon_name = "gtk-dialog-warning";
+          lclosing.label = "Tests paused";
         break;
       }
     }

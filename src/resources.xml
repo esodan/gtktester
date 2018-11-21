@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="/org/gnome">
     <file>gtktester.ui</file>
+    <file>gtkt-headerbar.ui</file>
   </gresource>
 </gresources>

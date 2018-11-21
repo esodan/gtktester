@@ -191,6 +191,8 @@ namespace Gtkt {
   private class ErrorMessage : Gtk.Grid {
     private Gtk.Label ltcase;
     private Gtk.Label lmessage;
+    public string test_case { get { return ltcase.label; } }
+    public string message { get { return lmessage.label; } }
     construct {
       lmessage = new Gtk.Label ("No message");
       ltcase = new Gtk.Label ("/case");
@@ -198,6 +200,7 @@ namespace Gtkt {
       attach (ltcase,0,1,1,1);
     }
     public ErrorMessage (string tcase, string msg) {
+      ltcase.label = tcase;
       lmessage.label = tcase +": "+ msg;
     }
   }
@@ -205,7 +208,7 @@ namespace Gtkt {
   /**
    * Test case with a method to call.
    */
-  public class TestCase : Object {
+  public struct TestCase {
     public string name;
     public TestCaseFunc* func;
   }
