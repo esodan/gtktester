@@ -1,3 +1,4 @@
+# We are moving to gitlab.com at gitlab.com/esodan/gtktester
 # gtktester
 Library with widgets for Gtk+ widget tests
 
